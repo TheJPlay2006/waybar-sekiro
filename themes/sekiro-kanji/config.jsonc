@@ -141,7 +141,7 @@
     "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n⇣ {bandwidthDownBytes}  ⇡ {bandwidthUpBytes}",
     "interval": 5,
-    "on-click": "noctalia msg panel-toggle control-center 2>/dev/null"
+    "on-click": "noctalia msg panel-toggle control-center network 2>/dev/null || nm-connection-editor 2>/dev/null"
   },
 
   // Audio (Posture Gauge / 姿勢)
@@ -152,8 +152,8 @@
       "default": ["", "", ""]
     },
     "scroll-step": 5,
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle 2>/dev/null || pamixer -t 2>/dev/null",
-    "on-click-right": "pavucontrol 2>/dev/null",
+    "on-click": "noctalia msg panel-toggle control-center audio 2>/dev/null || pavucontrol 2>/dev/null",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle 2>/dev/null || pamixer -t 2>/dev/null",
     "tooltip-format": "Posture / Sound: {volume}%"
   },
 
@@ -161,6 +161,7 @@
   "cpu": {
     "interval": 3,
     "format": "󰍛 {usage}%",
+    "on-click": "noctalia msg panel-toggle control-center system 2>/dev/null || alacritty -e btop 2>/dev/null",
     "tooltip-format": "Vitality (CPU): {usage}%"
   },
 
@@ -168,6 +169,7 @@
   "memory": {
     "interval": 5,
     "format": "󰘚 {percentage}%",
+    "on-click": "noctalia msg panel-toggle control-center system 2>/dev/null || alacritty -e btop 2>/dev/null",
     "tooltip-format": "Spirit Emblems (RAM): {used:0.1f}GiB / {total:0.1f}GiB"
   },
 
@@ -182,6 +184,7 @@
     "format-charging": "覚醒 󰢝 {capacity}%",
     "format-plugged": "誓約  {capacity}%",
     "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "on-click": "noctalia msg panel-toggle control-center power 2>/dev/null",
     "tooltip-format": "Resurrection Power (回生): {capacity}%\n{timeTo}"
   },
 
@@ -189,6 +192,8 @@
   "clock": {
     "format": "  {:%I:%M %p}",
     "format-alt": "🌸  {:%Y年 %m月 %d日 (%a)}",
+    "on-click": "noctalia msg panel-toggle control-center calendar 2>/dev/null",
+    "on-click-right": "noctalia msg panel-toggle control-center notifications 2>/dev/null",
     "tooltip-format": "<big><b>隻狼: 影逝二度</b></big>\n\n<tt><small>{calendar}</small></tt>\n\n「迷えば、敗れる」\n(Hesitation is defeat)"
   }
 }
