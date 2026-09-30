@@ -115,9 +115,9 @@ window#waybar {
 }
 
 #workspaces button {
-  all: initial;
+  font-family: 'Noto Sans CJK JP', 'Noto Serif CJK JP', 'MesloLGL Nerd Font', 'JetBrainsMono Nerd Font', sans-serif;
   color: @text_muted;
-  padding: 2px 9px;
+  padding: 2px 10px;
   margin: 0 2px;
   border-radius: 10px;
   font-size: 13px;
