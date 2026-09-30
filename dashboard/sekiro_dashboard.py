@@ -56,7 +56,7 @@ class SekiroDashboard(Gtk.Window):
         GtkLayerShell.set_margin(self, GtkLayerShell.Edge.RIGHT, 14)
 
         # Window dimensions
-        self.set_default_size(500, 680)
+        self.set_default_size(500, 770)
         self.set_resizable(False)
 
         # True Transparency
@@ -90,6 +90,7 @@ class SekiroDashboard(Gtk.Window):
         # System stats state
         self.prev_cpu_idle = 0
         self.prev_cpu_total = 0
+        GLib.timeout_add(150, self.push_system_stats)
         GLib.timeout_add(1500, self.push_system_stats)
 
         # Show immediately
@@ -122,64 +123,101 @@ class SekiroDashboard(Gtk.Window):
         elif action == "set_volume":
             try:
                 val = max(0, min(100, int(value)))
-                subprocess.Popen(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", f"{val}%"], stderr=subprocess.DEVNULL)
+                subprocess.run(["wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "0"], stderr=subprocess.DEVNULL)
+                subprocess.run(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", f"{val}%"], stderr=subprocess.DEVNULL)
             except Exception:
                 pass
 
         elif action == "set_brightness":
             try:
                 val = max(5, min(100, int(value)))
-                subprocess.Popen(["brightnessctl", "set", f"{val}%"], stderr=subprocess.DEVNULL)
+                if os.path.exists("/sys/class/backlight"):
+                    for b in os.listdir("/sys/class/backlight"):
+                        max_file = f"/sys/class/backlight/{b}/max_brightness"
+                        if os.path.isfile(max_file):
+                            with open(max_file) as f:
+                                max_b = int(f.read().strip())
+                            target = int((val / 100.0) * max_b)
+                            subprocess.run([
+                                "busctl", "call", "org.freedesktop.login1",
+                                "/org/freedesktop/login1/session/auto",
+                                "org.freedesktop.login1.Session", "SetBrightness",
+                                "ssu", "backlight", b, str(target)
+                            ], stderr=subprocess.DEVNULL)
+                            break
             except Exception:
                 pass
 
         elif action == "toggle_wifi":
-            subprocess.Popen(["nmcli", "radio", "wifi"], stderr=subprocess.DEVNULL)
-            GLib.timeout_add(800, self.push_system_stats)
+            try:
+                cur = subprocess.check_output(["nmcli", "radio", "wifi"], text=True, stderr=subprocess.DEVNULL).strip()
+                new_state = "off" if "enabled" in cur.lower() else "on"
+                subprocess.run(["nmcli", "radio", "wifi", new_state], stderr=subprocess.DEVNULL)
+            except Exception:
+                pass
+            GLib.timeout_add(350, self.push_system_stats)
 
         elif action == "toggle_bluetooth":
             try:
                 state = subprocess.check_output(["bluetoothctl", "show"], text=True, stderr=subprocess.DEVNULL)
-                new_state = "off" if "Powered: yes" in state else "on"
-                subprocess.Popen(["bluetoothctl", "power", new_state], stderr=subprocess.DEVNULL)
+                if "Powered: yes" in state:
+                    subprocess.run(["bluetoothctl", "power", "off"], stderr=subprocess.DEVNULL)
+                else:
+                    subprocess.run(["rfkill", "unblock", "bluetooth"], stderr=subprocess.DEVNULL)
+                    subprocess.run(["bluetoothctl", "power", "on"], stderr=subprocess.DEVNULL)
             except Exception:
                 pass
+            GLib.timeout_add(350, self.push_system_stats)
 
         elif action == "open_terminal":
             self.close_dashboard()
-            subprocess.Popen(["alacritty"], stderr=subprocess.DEVNULL)
+            subprocess.Popen(["alacritty"], start_new_session=True, stderr=subprocess.DEVNULL)
 
-        elif action == "open_launcher":
+        elif action == "open_browser":
             self.close_dashboard()
-            subprocess.Popen(["bash", "-c", "rofi -show drun 2>/dev/null || wofi --show drun 2>/dev/null || fuzzel 2>/dev/null || alacritty"], stderr=subprocess.DEVNULL)
+            subprocess.Popen(["brave"], start_new_session=True, stderr=subprocess.DEVNULL)
+
+        elif action == "open_files":
+            self.close_dashboard()
+            subprocess.Popen(["nautilus"], start_new_session=True, stderr=subprocess.DEVNULL)
+
+        elif action == "open_code":
+            self.close_dashboard()
+            subprocess.Popen(["code"], start_new_session=True, stderr=subprocess.DEVNULL)
+
+        elif action == "launch_app":
+            self.close_dashboard()
+            if value:
+                cmd = value if isinstance(value, list) else [value]
+                subprocess.Popen(cmd, start_new_session=True, stderr=subprocess.DEVNULL)
 
         elif action == "media_toggle":
-            subprocess.Popen(["playerctl", "play-pause"], stderr=subprocess.DEVNULL)
-            GLib.timeout_add(300, self.push_system_stats)
+            subprocess.run(["playerctl", "play-pause"], stderr=subprocess.DEVNULL)
+            GLib.timeout_add(250, self.push_system_stats)
 
         elif action == "media_next":
-            subprocess.Popen(["playerctl", "next"], stderr=subprocess.DEVNULL)
-            GLib.timeout_add(300, self.push_system_stats)
+            subprocess.run(["playerctl", "next"], stderr=subprocess.DEVNULL)
+            GLib.timeout_add(250, self.push_system_stats)
 
         elif action == "media_prev":
-            subprocess.Popen(["playerctl", "previous"], stderr=subprocess.DEVNULL)
-            GLib.timeout_add(300, self.push_system_stats)
+            subprocess.run(["playerctl", "previous"], stderr=subprocess.DEVNULL)
+            GLib.timeout_add(250, self.push_system_stats)
 
         elif action == "power_lock":
             self.close_dashboard()
-            subprocess.Popen(["bash", "-c", "swaylock -f -c 100b0d 2>/dev/null || niri msg action lock 2>/dev/null || true"])
+            subprocess.Popen(["bash", "-c", "swaylock -f -c 100b0d || loginctl lock-session"], start_new_session=True, stderr=subprocess.DEVNULL)
 
         elif action == "power_logout":
             self.close_dashboard()
-            subprocess.Popen(["niri", "msg", "action", "quit"], stderr=subprocess.DEVNULL)
+            subprocess.Popen(["niri", "msg", "action", "quit", "-s"], start_new_session=True, stderr=subprocess.DEVNULL)
 
         elif action == "power_reboot":
             self.close_dashboard()
-            subprocess.Popen(["systemctl", "reboot"], stderr=subprocess.DEVNULL)
+            subprocess.Popen(["systemctl", "reboot"], start_new_session=True, stderr=subprocess.DEVNULL)
 
         elif action == "power_shutdown":
             self.close_dashboard()
-            subprocess.Popen(["systemctl", "poweroff"], stderr=subprocess.DEVNULL)
+            subprocess.Popen(["systemctl", "poweroff"], start_new_session=True, stderr=subprocess.DEVNULL)
 
     def collect_system_stats(self):
         stats = {}
@@ -220,28 +258,51 @@ class SekiroDashboard(Gtk.Window):
             stats["ram_percent"] = 0
             stats["ram_text"] = "0 / 0 GB"
 
-        # Wi-Fi SSID
+        # Wi-Fi SSID and state
         try:
-            wifi_out = subprocess.check_output(["nmcli", "-t", "-f", "active,ssid", "dev", "wifi"], stderr=subprocess.DEVNULL, text=True)
-            active_ssid = next((line.split(":")[1] for line in wifi_out.splitlines() if line.startswith("yes:")), "Disconnected")
-            stats["wifi_ssid"] = active_ssid if active_ssid else "Disconnected"
+            wifi_state = subprocess.check_output(["nmcli", "radio", "wifi"], text=True, stderr=subprocess.DEVNULL).strip()
+            stats["wifi_enabled"] = ("enabled" in wifi_state.lower())
+            if stats["wifi_enabled"]:
+                wifi_out = subprocess.check_output(["nmcli", "-t", "-f", "active,ssid", "dev", "wifi"], stderr=subprocess.DEVNULL, text=True)
+                active_ssid = next((line.split(":")[1] for line in wifi_out.splitlines() if line.startswith("yes:")), None)
+                stats["wifi_ssid"] = active_ssid if active_ssid else "Disconnected"
+            else:
+                stats["wifi_ssid"] = "Wi-Fi Disabled"
         except Exception:
-            stats["wifi_ssid"] = "Ethernet / Local"
+            stats["wifi_enabled"] = True
+            stats["wifi_ssid"] = "Connected"
+
+        # Bluetooth status
+        try:
+            bt_out = subprocess.check_output(["bluetoothctl", "show"], text=True, stderr=subprocess.DEVNULL)
+            stats["bluetooth_enabled"] = ("Powered: yes" in bt_out)
+            info_out = subprocess.check_output(["bluetoothctl", "devices", "Connected"], text=True, stderr=subprocess.DEVNULL).strip()
+            if stats["bluetooth_enabled"]:
+                if info_out:
+                    stats["bluetooth_text"] = info_out.split(" ", 2)[-1] if len(info_out.split(" ")) >= 3 else "Connected"
+                else:
+                    stats["bluetooth_text"] = "On"
+            else:
+                stats["bluetooth_text"] = "Off"
+        except Exception:
+            stats["bluetooth_enabled"] = False
+            stats["bluetooth_text"] = "Off"
 
         # Battery
         try:
             bat_dir = "/sys/class/power_supply"
             bat_found = False
-            for b in os.listdir(bat_dir):
-                if b.startswith("BAT"):
-                    with open(f"{bat_dir}/{b}/capacity") as f:
-                        cap = f.read().strip()
-                    with open(f"{bat_dir}/{b}/status") as f:
-                        st = f.read().strip()
-                    icon = "󰢝" if st == "Charging" else "󰁹"
-                    stats["battery"] = f"{icon} {cap}%"
-                    bat_found = True
-                    break
+            if os.path.exists(bat_dir):
+                for b in os.listdir(bat_dir):
+                    if b.startswith("BAT"):
+                        with open(f"{bat_dir}/{b}/capacity") as f:
+                            cap = f.read().strip()
+                        with open(f"{bat_dir}/{b}/status") as f:
+                            st = f.read().strip()
+                        icon = "󰢝" if st == "Charging" else "󰁹"
+                        stats["battery"] = f"{icon} {cap}%"
+                        bat_found = True
+                        break
             if not bat_found:
                 stats["battery"] = "󰚥 AC Power"
         except Exception:
@@ -253,8 +314,23 @@ class SekiroDashboard(Gtk.Window):
             match = re.search(r"Volume:\s*([0-9.]+)", vol_out)
             if match:
                 stats["volume"] = int(float(match.group(1)) * 100)
+            stats["is_muted"] = ("[MUTED]" in vol_out)
         except Exception:
-            pass
+            stats["volume"] = 50
+            stats["is_muted"] = False
+
+        # Brightness
+        try:
+            if os.path.exists("/sys/class/backlight"):
+                for b in os.listdir("/sys/class/backlight"):
+                    with open(f"/sys/class/backlight/{b}/brightness") as f:
+                        cur = float(f.read().strip())
+                    with open(f"/sys/class/backlight/{b}/max_brightness") as f:
+                        m = float(f.read().strip())
+                    stats["brightness"] = max(5, min(100, int((cur / m) * 100)))
+                    break
+        except Exception:
+            stats["brightness"] = 70
 
         # Uptime
         try:
