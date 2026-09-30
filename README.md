@@ -3,10 +3,12 @@
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-crimson.svg?style=for-the-badge)](LICENSE)
+[![Open Source](https://img.shields.io/badge/Open%20Source-%E2%99%A5-success.svg?style=for-the-badge)](LICENSE)
+[![Author: Jairo Herrera Romero](https://img.shields.io/badge/Author-Jairo%20Herrera%20Romero-d4af37.svg?style=for-the-badge&logo=github)](https://github.com/TheJPlay2006)
 [![Waybar](https://img.shields.io/badge/Waybar-v0.9.0%2B-181113.svg?style=for-the-badge&logo=wayland&logoColor=white)](https://github.com/Alexays/Waybar)
 [![GRUB Theme](https://img.shields.io/badge/GRUB-1080p%20%7C%201440p-b14046.svg?style=for-the-badge)](grub/)
 [![Fastfetch](https://img.shields.io/badge/Terminal-Fastfetch%20Themed-d4af37.svg?style=for-the-badge)](fastfetch/)
-[![Platform](https://img.shields.io/badge/Platform-Arch%20%7C%20Fedora%20%7C%20Debian%20%7C%20openSUSE-e63946.svg?style=for-the-badge&logo=linux&logoColor=white)](https://kernel.org)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](https://github.com/TheJPlay2006/waybar-sekiro/pulls)
 
 <p align="center">
   <b>「迷えば、敗れる」 — <i>Hesitation is defeat</i></b><br>
@@ -24,7 +26,8 @@
 waybar-sekiro/
 ├── 📜 install.sh               # Universal installer for all suite components
 ├── 🔄 uninstall.sh             # Safe uninstaller (with automatic backup restoration)
-├── ⚖️ LICENSE                  # MIT License
+├── ⚖️ LICENSE                  # MIT License (100% Free & Open Source)
+├── 👥 CONTRIBUTORS.md          # Project authors and contribution guide
 ├── 📂 themes/
 │   ├── sekiro-kanji/           # Flagship Waybar theme (Kanji, Sakura, Vitality & Posture)
 │   └── sekiro-minimal/         # Minimalist edge-to-edge crimson line edition
@@ -33,6 +36,30 @@ waybar-sekiro/
 ├── 📂 wallpapers/              # High-resolution Sekiro wallpapers
 └── 📂 scripts/                 # MPRIS media reader and cross-distro update counter
 ```
+
+---
+
+## 🌐 Universal Multi-Distribution & Compositor Support
+
+Sekiro Linux Suite is engineered from the ground up to be **100% Free & Open Source (FOSS)**, universally compatible across major Linux distributions, architectures, and modern Wayland compositors:
+
+### Linux Distributions
+| Distribution / Flavor | Status | Package Manager | Tested / Supported |
+| :--- | :---: | :---: | :--- |
+| **Arch Linux / CachyOS / Manjaro / EndeavourOS** | 🟢 | `pacman` | Fully Supported & Automated |
+| **Fedora / RHEL / Nobara** | 🟢 | `dnf` | Fully Supported & Automated |
+| **Debian / Ubuntu / Pop!_OS / Linux Mint** | 🟢 | `apt` | Fully Supported & Automated |
+| **openSUSE (Tumbleweed / Leap)** | 🟢 | `zypper` | Fully Supported & Automated |
+| **Void Linux / NixOS / Gentoo** | 🟢 | Distro Native | Fully Supported |
+
+### Wayland Compositors
+| Compositor | Workspace Module | Status | Notes |
+| :--- | :--- | :---: | :--- |
+| **Niri** | `niri/workspaces` | 🟢 Verified | Native dynamic workspace support with Kanji numerals |
+| **Hyprland** | `hyprland/workspaces` | 🟢 Verified | Full special workspace & active monitor support |
+| **Sway** | `sway/workspaces` | 🟢 Verified | Classic i3/Sway workspace mapping |
+| **River** | `river/tags` | 🟢 Verified | River tag switching support |
+| **Wayfire / Labwc** | `wlr/workspaces` | 🟢 Verified | wlroots ext-workspace support |
 
 ---
 
@@ -180,9 +207,20 @@ cd waybar-sekiro
 
 ---
 
+## 👥 Author & Contributors
+
+This project is created and maintained with honor by:
+
+* **Jairo Herrera Romero** ([@TheJPlay2006](https://github.com/TheJPlay2006)) — *Project Founder, Lead Developer & Designer*
+
+We warmly welcome contributions from the Linux community worldwide!  
+Check out [`CONTRIBUTORS.md`](CONTRIBUTORS.md) for contribution guidelines, ideas, and details on how to contribute.
+
+---
+
 ## 📜 License
 
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more details.
+Distributed under the **MIT License**. 100% Free and Open Source. See [`LICENSE`](LICENSE) for more details.
 
 ---
 
