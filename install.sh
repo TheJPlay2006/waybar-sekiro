@@ -103,8 +103,11 @@ install_wallpapers() {
 
     # If noctalia or swww or hyprpaper is running, offer to apply
     if command -v noctalia >/dev/null 2>&1; then
-        echo -e "${CYAN}[*] Setting Sekiro wallpaper via Noctalia...${RESET}"
+        echo -e "${CYAN}[*] Setting Sekiro wallpaper & avatar via Noctalia...${RESET}"
         noctalia msg wallpaper-set "$WALLPAPERS_DIR/sekiro_ashina_1080p.png" 2>/dev/null || true
+        cp -f "$WALLPAPERS_DIR/sekiro_avatar.png" "$HOME/Pictures/sekiro_avatar.png" 2>/dev/null || true
+        cp -f "$WALLPAPERS_DIR/sekiro_avatar.png" "$HOME/.face.icon" 2>/dev/null || true
+        cp -f "$WALLPAPERS_DIR/sekiro_avatar.png" "$HOME/.face" 2>/dev/null || true
     fi
 }
 
