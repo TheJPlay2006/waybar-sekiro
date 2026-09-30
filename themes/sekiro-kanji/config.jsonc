@@ -3,10 +3,10 @@
   "layer": "top",
   "position": "top",
   "height": 34,
-  "spacing": 4,
-  "margin-top": 4,
-  "margin-left": 8,
-  "margin-right": 8,
+  "spacing": 6,
+  "margin-top": 5,
+  "margin-left": 10,
+  "margin-right": 10,
 
   // Modules layout
   "modules-left": [
@@ -23,24 +23,27 @@
   ],
   "modules-right": [
     "tray",
-    "group/stats",
-    "group/hardware",
+    "network",
+    "pulseaudio",
+    "cpu",
+    "memory",
     "battery",
     "clock"
   ],
 
-  // Sekiro Emblem / App Launcher
+  // Sekiro Emblem / App Launcher (Torii Gate & Sakura Petals)
   "custom/sekiro-logo": {
-    "format": "⚔",
-    "tooltip-format": "隻狼 - Shadows Die Twice\n「迷えば、敗れる」 (Hesitation is defeat)",
-    "on-click": "rofi -show drun 2>/dev/null || wofi --show drun 2>/dev/null || fuzzel 2>/dev/null || noctalia msg panel-toggle launcher 2>/dev/null"
+    "format": "⛩  隻狼 🌸",
+    "tooltip-format": "隻狼: SHADOWS DIE TWICE\n「迷えば、敗れる」 (Hesitation is defeat)\n\nClick: Open Launcher\nRight Click: Power Menu",
+    "on-click": "rofi -show drun 2>/dev/null || wofi --show drun 2>/dev/null || fuzzel 2>/dev/null || noctalia msg panel-toggle launcher 2>/dev/null || alacritty",
+    "on-click-right": "wlogout 2>/dev/null || noctalia msg panel-toggle session 2>/dev/null"
   },
 
-  // Hyprland Workspaces (Traditional Kanji Numbers)
+  // Hyprland Workspaces (Traditional Kanji Numerals)
   "hyprland/workspaces": {
     "on-click": "activate",
     "all-outputs": true,
-    "format": "{name}",
+    "format": "{icon}",
     "format-icons": {
       "1": "一",
       "2": "二",
@@ -61,9 +64,9 @@
     }
   },
 
-  // Niri Workspaces (Kanji)
+  // Niri Workspaces (Kanji Numerals)
   "niri/workspaces": {
-    "format": "{name}",
+    "format": "{icon}",
     "format-icons": {
       "1": "一",
       "2": "二",
@@ -84,23 +87,33 @@
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
-    "format": "{name}"
+    "format": "{icon}",
+    "format-icons": {
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "focused": "斬",
+      "urgent": "危",
+      "default": "一"
+    }
   },
 
-  // Active Window Title
+  // Active Window Title (Japanese Calligraphy Brackets)
   "hyprland/window": {
-    "format": "<b>{}</b>",
-    "max-length": 40,
+    "format": "⚔ 『 {} 』",
+    "max-length": 38,
     "separate-outputs": true
   },
   "niri/window": {
-    "format": "<b>{}</b>",
-    "max-length": 40,
+    "format": "⚔ 『 {} 』",
+    "max-length": 38,
     "separate-outputs": true
   },
   "sway/window": {
-    "format": "<b>{}</b>",
-    "max-length": 40
+    "format": "⚔ 『 {} 』",
+    "max-length": 38
   },
 
   // Media Player (MPRIS)
@@ -120,79 +133,62 @@
     "spacing": 8
   },
 
-  // Stats Group (Audio & Network)
-  "group/stats": {
-    "orientation": "inherit",
-    "modules": [
-      "network",
-      "pulseaudio"
-    ]
+  // Network (Spirit Connection)
+  "network": {
+    "format-wifi": "󰤨  {essid}",
+    "format-ethernet": "󰀂  有線",
+    "format-disconnected": "󰤮  断絶",
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n⇣ {bandwidthDownBytes}  ⇡ {bandwidthUpBytes}",
+    "interval": 5,
+    "on-click": "noctalia msg panel-toggle control-center 2>/dev/null"
   },
 
-  // Hardware Group (CPU & Memory)
-  "group/hardware": {
-    "orientation": "inherit",
-    "modules": [
-      "cpu",
-      "memory"
-    ]
-  },
-
-  // Audio (Posture Gauge styled)
+  // Audio (Posture Gauge / 姿勢)
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-muted": "  Silenced",
+    "format-muted": "  沈黙",
     "format-icons": {
       "default": ["", "", ""]
     },
     "scroll-step": 5,
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle 2>/dev/null || pamixer -t 2>/dev/null",
     "on-click-right": "pavucontrol 2>/dev/null",
-    "tooltip-format": "Volume: {volume}%"
+    "tooltip-format": "Posture / Sound: {volume}%"
   },
 
-  // Network
-  "network": {
-    "format-wifi": "󰤨  {essid}",
-    "format-ethernet": "󰀂  Wired",
-    "format-disconnected": "󰤮  Unbound",
-    "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n⇣ {bandwidthDownBytes}  ⇡ {bandwidthUpBytes}",
-    "interval": 5
-  },
-
-  // CPU (Vitality themed)
+  // CPU (Vitality Meter / 体力)
   "cpu": {
     "interval": 3,
     "format": "󰍛 {usage}%",
-    "tooltip": true
+    "tooltip-format": "Vitality (CPU): {usage}%"
   },
 
-  // Memory
+  // Memory (Spirit Emblems / 形代)
   "memory": {
     "interval": 5,
     "format": "󰘚 {percentage}%",
-    "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB"
+    "tooltip-format": "Spirit Emblems (RAM): {used:0.1f}GiB / {total:0.1f}GiB"
   },
 
-  // Battery (Resurrection Nodes: 回生)
+  // Battery (Resurrection Nodes / 回生)
   "battery": {
     "states": {
       "good": 95,
       "warning": 30,
       "critical": 15
     },
-    "format": "{icon} {capacity}%",
-    "format-charging": "󰢝 {capacity}%",
-    "format-plugged": " {capacity}%",
+    "format": "回生 {icon} {capacity}%",
+    "format-charging": "覚醒 󰢝 {capacity}%",
+    "format-plugged": "誓約  {capacity}%",
     "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "tooltip-format": "Resurrection Power: {capacity}%\n{timeTo}"
+    "tooltip-format": "Resurrection Power (回生): {capacity}%\n{timeTo}"
   },
 
-  // Clock (with Kanji date option)
+  // Clock (Sanctuary Bell / 鐘)
   "clock": {
     "format": "  {:%I:%M %p}",
-    "format-alt": "  {:%Y年 %m月 %d日 (%a)}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    "format-alt": "🌸  {:%Y年 %m月 %d日 (%a)}",
+    "tooltip-format": "<big><b>隻狼: 影逝二度</b></big>\n\n<tt><small>{calendar}</small></tt>\n\n「迷えば、敗れる」\n(Hesitation is defeat)"
   }
 }

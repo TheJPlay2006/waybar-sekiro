@@ -1,57 +1,93 @@
-# ⚔️ Sekiro: Shadows Die Twice — Waybar Theme (隻狼)
+# ⚔️ Sekiro: Shadows Die Twice — Linux Theme Suite (隻狼)
 
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-crimson.svg?style=for-the-badge)](LICENSE)
 [![Waybar](https://img.shields.io/badge/Waybar-v0.9.0%2B-181113.svg?style=for-the-badge&logo=wayland&logoColor=white)](https://github.com/Alexays/Waybar)
-[![Compositors](https://img.shields.io/badge/Compositors-Hyprland%20%7C%20Niri%20%7C%20Sway%20%7C%20River-b14046.svg?style=for-the-badge)](https://github.com)
+[![GRUB Theme](https://img.shields.io/badge/GRUB-1080p%20%7C%201440p-b14046.svg?style=for-the-badge)](grub/)
+[![Fastfetch](https://img.shields.io/badge/Terminal-Fastfetch%20Themed-d4af37.svg?style=for-the-badge)](fastfetch/)
 [![Platform](https://img.shields.io/badge/Platform-Arch%20%7C%20Fedora%20%7C%20Debian%20%7C%20openSUSE-e63946.svg?style=for-the-badge&logo=linux&logoColor=white)](https://kernel.org)
 
 <p align="center">
   <b>「迷えば、敗れる」 — <i>Hesitation is defeat</i></b><br>
-  An atmospheric, dark-feudal, calligraphy-inspired Waybar theme capturing the essence of FromSoftware's <i>Sekiro: Shadows Die Twice</i>.
+  A complete, atmospheric Linux desktop suite inspired by FromSoftware's masterpiece <b>Sekiro: Shadows Die Twice</b>.<br>
+  Featuring an authentic Waybar theme, full GRUB bootloader theme, custom terminal Fastfetch, and high-res wallpapers.
 </p>
 
 </div>
 
 ---
 
-## 🗡️ Features
+## 🗡️ What's Inside the Suite
 
-* **⛩️ Traditional Japanese Kanji Workspaces:**  
-  Workspaces numbered with authentic kanjis (`一`, `二`, `三`, `四`, `五`, `六`, `七`, `八`, `九`, `十`).
-* **🩸 Deathblow & Danger Accents:**  
-  - Active workspace glows in radiant vermilion blood-red with the Deathblow kanji (`斬`).
-  - Urgent and alert workspaces pulse with the iconic Sekiro danger kanji (`危`).
-* **🔴 Resurrection Nodes (`回生`):**  
-  Battery levels and status rendered as Shinobi resurrection orbs.
-* **⚔️ Vitality & Posture Gauges:**  
-  Volume, CPU, and RAM modules themed after Ashina vitality and posture meters.
-* **🌐 Cross-Compositor Native:**  
-  Built with native support for **Hyprland**, **Niri**, **Sway**, **River**, and generic `wlroots` window managers.
-* **🐧 Distro-Agnostic:**  
-  Tested and compatible with Arch Linux / CachyOS, Fedora, Ubuntu/Debian, openSUSE, and more.
-* **🎨 Two Distinct Presets:**  
-  1. `sekiro-kanji`: The flagship theme with kanji numerals, aged gold borders, and glowing blood embers.
-  2. `sekiro-minimal`: A slim, edge-to-edge minimalist design with a clean crimson line accent.
+```text
+waybar-sekiro/
+├── 📜 install.sh               # Universal installer for all suite components
+├── 🔄 uninstall.sh             # Safe uninstaller (with automatic backup restoration)
+├── ⚖️ LICENSE                  # MIT License
+├── 📂 themes/
+│   ├── sekiro-kanji/           # Flagship Waybar theme (Kanji, Sakura, Vitality & Posture)
+│   └── sekiro-minimal/         # Minimalist edge-to-edge crimson line edition
+├── 📂 grub/                    # Full Sekiro GRUB Bootloader theme (1080p/1440p + Brush fonts)
+├── 📂 fastfetch/               # Custom Terminal Fetch (Clan, Dojo, Vitality & Posture stats)
+├── 📂 wallpapers/              # High-resolution Sekiro wallpapers
+└── 📂 scripts/                 # MPRIS media reader and cross-distro update counter
+```
 
 ---
 
-## 🎨 Color Palette
+## 🌸 1. The Waybar Experience
 
-| Color Name | Hex / RGB | Role |
-|---|---|---|
-| **Kurogane (Dark Iron / Ash)** | `#161113` | Module backgrounds and capsules |
-| **Kurenai (Blood Vermilion)** | `#e63946` | Primary deathblow accent & active borders |
-| **Homura (Resurrection Flame)** | `#ff4d5a` | Glowing highlights & hover states |
-| **Kin (Aged Temple Gold)** | `#d4af37` | Secondary text & refined borders |
-| **Washi (Parchment Bone)** | `#f5f0ea` | Primary text and icons |
+* **⛩️ Torii & Sakura Launcher:**  
+  Leftmost emblem featuring the sacred Torii gate and falling cherry blossom petals (`⛩ 隻狼 🌸`).
+* **🪨 Traditional Japanese Kanji Workspaces:**  
+  Workspaces rendered as stamped Japanese kanjis:  
+  `一` (1), `二` (2), `三` (3), `四` (4), `五` (5), `六` (6), `七` (7), `八` (8), `九` (9), `十` (10).
+* **🩸 Deathblow Slash (`斬`):**  
+  The active workspace bursts into a radiant vermilion-blood gradient with a deathblow slash effect.
+* **⚠️ Danger Alert (`危`):**  
+  Urgent or alerting workspaces pulse in vibrant crimson red.
+* **⚔️ Katana Window Titles:**  
+  Active windows enclosed in traditional calligraphy brackets: `⚔ 『 Active Window 』`.
+* **🔴 Resurrection Nodes (`回生`):**  
+  Battery levels and status rendered as Shinobi resurrection orbs.
+* **📊 Vitality & Posture Gauges:**  
+  - **Vitality (CPU):** Turquoise meter (`#2ec4b6`)
+  - **Posture (Volume):** Burning amber meter (`#ff9f1c`)
+  - **Spirit Emblems (RAM):** Temple gold meter (`#d4af37`)
+  - **Spirit Network (Wi-Fi):** Azure connection meter (`#4cc9f0`)
+* **鐘 Sanctuary Bell Clock:**  
+  Japanese time formatting with rich tooltips including calendar and Sekiro quotes.
+
+---
+
+## 🏮 2. The GRUB Bootloader Theme
+
+Included in `grub/`, featuring:
+* Custom calligraphy brush typography (`Dersu Uzala brush` & `Fira Code`).
+* Native **1920x1080** and **2560x1440** resolution support.
+* Dynamic timeout countdown: `Hesitation is defeat: %ds`.
+* Automatic font compilation and bootloader regeneration via the installer.
+
+---
+
+## 📜 3. Custom Fastfetch Terminal
+
+Included in `fastfetch/`:
+* Displays system information themed after the Shinobi journey:
+  - **Clan:** OS Name
+  - **Discipline:** Linux Kernel
+  - **Dojo:** Window Manager / Compositor
+  - **Scroll:** Terminal Emulator
+  - **Vitality:** CPU Usage & Model
+  - **Posture:** RAM Utilization
+  - **Journey:** System Uptime
 
 ---
 
 ## 📦 Prerequisites & Recommended Fonts
 
-To render the Japanese kanjis and Shinobi icons properly, install:
+For authentic Japanese calligraphy and icons, install:
 
 ### 1. Japanese CJK Font (Recommended: `Noto Sans CJK JP`)
 * **Arch Linux / CachyOS:**
@@ -84,7 +120,7 @@ To render the Japanese kanjis and Shinobi icons properly, install:
 
 ---
 
-## 🚀 Quick Installation
+## 🚀 Installation
 
 Clone the repository and run the automated interactive installer:
 
@@ -95,34 +131,20 @@ chmod +x install.sh
 ./install.sh
 ```
 
-### What the installer does:
-1. Verifies that Waybar is installed and checks for font availability.
-2. Lets you choose between **Sekiro Kanji** (Flagship) and **Sekiro Minimal**.
-3. Creates a safe automatic backup of any existing Waybar configuration to `~/.config/waybar.bak.<timestamp>`.
-4. Installs configuration, stylesheet, and helper scripts into `~/.config/waybar`.
-5. Restarts Waybar cleanly.
-
----
-
-## 📂 Project Structure
-
+### Interactive Installer Menu:
 ```text
-waybar-sekiro/
-├── install.sh                  # Interactive cross-distro installer
-├── uninstall.sh                # Safe uninstaller (with backup restore)
-├── LICENSE                     # MIT License
-├── README.md                   # Documentation
-├── scripts/
-│   ├── mediaplayer.sh          # Lightweight MPRIS player reader
-│   └── updates.sh              # Multi-distro package update counter
-└── themes/
-    ├── sekiro-kanji/           # Flagship Kanji & Resurrection theme
-    │   ├── config.jsonc
-    │   └── style.css
-    └── sekiro-minimal/         # Minimalist edge-to-edge edition
-        ├── config.jsonc
-        └── style.css
+What would you like to install?
+  1) Complete Sekiro Suite (Waybar + Wallpapers + Fastfetch + GRUB Theme)
+  2) Waybar Theme Only
+  3) GRUB Theme Only
+  4) Wallpapers & Terminal Fastfetch Only
 ```
+
+The installer automatically:
+1. Backs up any existing configuration.
+2. Detects your window manager (Niri, Hyprland, Sway, River).
+3. Compiles the custom fonts and updates the bootloader if GRUB is chosen.
+4. Restarts Waybar smoothly.
 
 ---
 
@@ -131,13 +153,15 @@ waybar-sekiro/
 Colors are defined at the top of `style.css` using CSS `@define-color` variables for easy personal tuning:
 
 ```css
-@define-color bg_module rgba(22, 17, 19, 0.88);
-@define-color border_gold rgba(198, 159, 104, 0.35);
+@define-color bg_module rgba(22, 17, 19, 0.90);
+@define-color border_gold rgba(212, 175, 55, 0.42);
 @define-color sekiro_red #e63946;
 @define-color sekiro_flame #ff4d5a;
+@define-color vitality_teal #2ec4b6;
+@define-color posture_amber #ff9f1c;
 ```
 
-After modifying `~/.config/waybar/style.css`, reload Waybar instantly with:
+Reload Waybar instantly with:
 
 ```bash
 pkill -SIGUSR2 waybar
@@ -147,7 +171,7 @@ pkill -SIGUSR2 waybar
 
 ## 🔄 Uninstallation
 
-To remove the theme and restore your previous configuration:
+To remove any installed component and restore your previous backup:
 
 ```bash
 cd waybar-sekiro

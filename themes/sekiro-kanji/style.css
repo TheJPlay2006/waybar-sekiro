@@ -1,35 +1,39 @@
 /* ==========================================================================
-   SEKIRO: SHADOWS DIE TWICE - WAYBAR THEME (KANJI EDITION)
+   SEKIRO: SHADOWS DIE TWICE - WAYBAR THEME (KANJI & SAKURA EDITION)
    ========================================================================== */
 
-/* Color Palette - Feudal Ash & Crimson */
+/* Color Palette - Feudal Ash, Crimson & Temple Gold */
 @define-color bg_bar transparent;
-@define-color bg_module rgba(22, 17, 19, 0.88);
-@define-color bg_module_hover rgba(38, 22, 26, 0.95);
+@define-color bg_module rgba(22, 17, 19, 0.90);
+@define-color bg_module_hover rgba(42, 24, 28, 0.98);
 
 /* Borders & Accents */
-@define-color border_gold rgba(198, 159, 104, 0.35);
+@define-color border_gold rgba(212, 175, 55, 0.42);
 @define-color border_gold_bright #d4af37;
-@define-color border_red rgba(230, 57, 70, 0.50);
+@define-color border_red rgba(230, 57, 70, 0.55);
 @define-color border_red_bright #e63946;
 
 /* Text Colors */
 @define-color text_bone #f5f0ea;
 @define-color text_gold #e0a96d;
 @define-color text_muted #9c8a8c;
+@define-color text_sakura #ffb7b2;
 
-/* Accent Crimson & Fire */
+/* Lore Accents */
 @define-color sekiro_red #e63946;
 @define-color sekiro_blood #b14046;
 @define-color sekiro_flame #ff4d5a;
 @define-color sekiro_danger #c1121f;
+@define-color vitality_teal #2ec4b6;
+@define-color posture_amber #ff9f1c;
+@define-color spirit_blue #4cc9f0;
 
 * {
   color: @text_bone;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   min-height: 0;
-  font-family: 'Noto Sans CJK JP', 'MesloLGL Nerd Font', 'JetBrainsMono Nerd Font', 'FontAwesome', sans-serif;
+  font-family: 'Noto Sans CJK JP', 'Noto Serif CJK JP', 'MesloLGL Nerd Font', 'JetBrainsMono Nerd Font', 'FontAwesome', sans-serif;
   font-size: 13px;
   font-weight: 600;
 }
@@ -49,73 +53,80 @@ window#waybar {
 }
 
 /* ==========================================================================
-   BASE MODULE CAPSULES
+   BASE MODULE CAPSULES (INDIVIDUAL PILLS)
    ========================================================================== */
 #custom-sekiro-logo,
 #workspaces,
 #custom-media,
 #window,
 #tray,
-#group-stats,
-#group-hardware,
+#network,
+#pulseaudio,
+#cpu,
+#memory,
 #battery,
 #clock {
   background-color: @bg_module;
   border: 1px solid @border_gold;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 3px 12px;
   margin: 4px 3px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.50);
   transition: all 0.25s ease-in-out;
 }
 
 #custom-sekiro-logo:hover,
 #custom-media:hover,
 #window:hover,
-#group-stats:hover,
-#group-hardware:hover,
-#battery:hover {
+#network:hover,
+#pulseaudio:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#clock:hover {
   border-color: @border_red_bright;
   background-color: @bg_module_hover;
-  box-shadow: 0 0 10px rgba(230, 57, 70, 0.35);
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.45);
 }
 
 /* ==========================================================================
-   SEKIRO EMBLEM (LEFT)
+   SEKIRO EMBLEM (TORII & SAKURA)
    ========================================================================== */
 #custom-sekiro-logo {
   color: @sekiro_red;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 900;
-  padding: 3px 12px;
+  padding: 3px 14px;
   border-color: @border_red;
+  background: linear-gradient(135deg, rgba(177, 64, 70, 0.35) 0%, rgba(22, 17, 19, 0.95) 100%);
 }
 
 #custom-sekiro-logo:hover {
   color: @sekiro_flame;
-  box-shadow: 0 0 12px rgba(230, 57, 70, 0.6);
+  box-shadow: 0 0 14px rgba(230, 57, 70, 0.70);
+  border-color: @border_gold_bright;
 }
 
 /* ==========================================================================
-   WORKSPACES (KANJI)
+   WORKSPACES (KANJI STAMP STYLE)
    ========================================================================== */
 #workspaces {
-  padding: 2px 5px;
+  padding: 2px 6px;
 }
 
 #workspaces button {
   all: initial;
   color: @text_muted;
-  padding: 2px 8px;
+  padding: 2px 9px;
   margin: 0 2px;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 13px;
   font-weight: 700;
   transition: all 0.2s ease-in-out;
 }
 
 #workspaces button:hover {
-  background-color: rgba(230, 57, 70, 0.2);
+  background-color: rgba(230, 57, 70, 0.25);
   color: @sekiro_flame;
 }
 
@@ -124,14 +135,14 @@ window#waybar {
   background: linear-gradient(135deg, @sekiro_blood 0%, @sekiro_red 100%);
   color: #ffffff;
   border: 1px solid @sekiro_flame;
-  box-shadow: 0 0 10px rgba(230, 57, 70, 0.65);
+  box-shadow: 0 0 12px rgba(230, 57, 70, 0.75);
 }
 
 #workspaces button.urgent {
   background-color: @sekiro_danger;
   color: #ffffff;
   animation-name: danger_pulse;
-  animation-duration: 0.7s;
+  animation-duration: 0.6s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -146,7 +157,7 @@ window#waybar {
 }
 
 /* ==========================================================================
-   MEDIA PLAYER
+   MEDIA PLAYER (MPRIS)
    ========================================================================== */
 #custom-media {
   color: @text_bone;
@@ -154,12 +165,12 @@ window#waybar {
 }
 
 /* ==========================================================================
-   WINDOW TITLE (CENTER)
+   WINDOW TITLE (CENTER KATANA BRACKETS)
    ========================================================================== */
 #window {
   color: @text_gold;
   font-size: 12px;
-  padding: 3px 16px;
+  padding: 3px 18px;
 }
 
 window#waybar.empty #window {
@@ -169,53 +180,45 @@ window#waybar.empty #window {
 }
 
 /* ==========================================================================
-   STATS & HARDWARE GROUPS
+   RIGHT MODULES (VITALITY, POSTURE, EMBLEMS)
    ========================================================================== */
-#group-stats,
-#group-hardware {
-  padding: 3px 12px;
-}
 
-#network,
-#pulseaudio,
-#cpu,
-#memory {
-  margin: 0 6px;
-}
-
+/* Network (Spirit / Azure) */
 #network {
-  color: #e0a96d;
+  color: @spirit_blue;
 }
 
 #network.disconnected {
   color: @text_muted;
 }
 
+/* Audio (Posture / Amber) */
 #pulseaudio {
-  color: @sekiro_flame;
+  color: @posture_amber;
 }
 
 #pulseaudio.muted {
   color: @text_muted;
 }
 
+/* CPU (Vitality / Teal) */
 #cpu {
-  color: #f7a399;
+  color: @vitality_teal;
 }
 
+/* RAM (Spirit Emblems / Gold) */
 #memory {
-  color: #e29578;
-}
-
-/* ==========================================================================
-   BATTERY (RESURRECTION ORBS)
-   ========================================================================== */
-#battery {
   color: @text_gold;
 }
 
+/* Battery (Resurrection / Crimson Nodes) */
+#battery {
+  color: @sekiro_flame;
+  border-color: @border_red;
+}
+
 #battery.charging {
-  color: #52b788;
+  color: @vitality_teal;
 }
 
 #battery.critical:not(.charging) {
@@ -228,24 +231,20 @@ window#waybar.empty #window {
   animation-direction: alternate;
 }
 
-/* ==========================================================================
-   CLOCK
-   ========================================================================== */
+/* Clock (Sanctuary Bell / Crimson & Gold) */
 #clock {
   color: #ffffff;
   border-color: @border_red_bright;
-  background: linear-gradient(135deg, rgba(177, 64, 70, 0.6) 0%, rgba(26, 17, 19, 0.95) 100%);
-  box-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
-  padding: 3px 14px;
+  background: linear-gradient(135deg, rgba(177, 64, 70, 0.70) 0%, rgba(26, 17, 19, 0.96) 100%);
+  box-shadow: 0 0 12px rgba(230, 57, 70, 0.45);
+  padding: 3px 16px;
 }
 
 #clock:hover {
-  box-shadow: 0 0 16px rgba(230, 57, 70, 0.7);
+  box-shadow: 0 0 18px rgba(230, 57, 70, 0.75);
 }
 
-/* ==========================================================================
-   SYSTEM TRAY
-   ========================================================================== */
+/* System Tray */
 #tray {
   padding: 2px 10px;
 }
@@ -259,16 +258,15 @@ window#waybar.empty #window {
   background-color: @sekiro_danger;
 }
 
-/* ==========================================================================
-   TOOLTIPS
-   ========================================================================== */
+/* Tooltip (Japanese Parchment Scroll) */
 tooltip {
-  background: rgba(18, 14, 16, 0.97);
-  border: 1px solid @border_gold;
-  border-radius: 10px;
+  background: rgba(18, 14, 16, 0.98);
+  border: 1px solid @border_gold_bright;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.75);
 }
 
 tooltip label {
   color: @text_bone;
-  padding: 6px;
+  padding: 8px;
 }
