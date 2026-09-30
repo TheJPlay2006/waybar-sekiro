@@ -1,0 +1,198 @@
+{
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "spacing": 4,
+  "margin-top": 4,
+  "margin-left": 8,
+  "margin-right": 8,
+
+  // Modules layout
+  "modules-left": [
+    "custom/sekiro-logo",
+    "hyprland/workspaces",
+    "niri/workspaces",
+    "sway/workspaces",
+    "custom/media"
+  ],
+  "modules-center": [
+    "hyprland/window",
+    "niri/window",
+    "sway/window"
+  ],
+  "modules-right": [
+    "tray",
+    "group/stats",
+    "group/hardware",
+    "battery",
+    "clock"
+  ],
+
+  // Sekiro Emblem / App Launcher
+  "custom/sekiro-logo": {
+    "format": "⚔",
+    "tooltip-format": "隻狼 - Shadows Die Twice\n「迷えば、敗れる」 (Hesitation is defeat)",
+    "on-click": "rofi -show drun 2>/dev/null || wofi --show drun 2>/dev/null || fuzzel 2>/dev/null || noctalia msg panel-toggle launcher 2>/dev/null"
+  },
+
+  // Hyprland Workspaces (Traditional Kanji Numbers)
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "all-outputs": true,
+    "format": "{name}",
+    "format-icons": {
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六",
+      "7": "七",
+      "8": "八",
+      "9": "九",
+      "10": "十",
+      "urgent": "危",
+      "active": "斬",
+      "default": "一"
+    },
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5]
+    }
+  },
+
+  // Niri Workspaces (Kanji)
+  "niri/workspaces": {
+    "format": "{name}",
+    "format-icons": {
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六",
+      "7": "七",
+      "8": "八",
+      "9": "九",
+      "10": "十",
+      "active": "斬",
+      "default": "一"
+    }
+  },
+
+  // Sway Workspaces (Kanji)
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{name}"
+  },
+
+  // Active Window Title
+  "hyprland/window": {
+    "format": "<b>{}</b>",
+    "max-length": 40,
+    "separate-outputs": true
+  },
+  "niri/window": {
+    "format": "<b>{}</b>",
+    "max-length": 40,
+    "separate-outputs": true
+  },
+  "sway/window": {
+    "format": "<b>{}</b>",
+    "max-length": 40
+  },
+
+  // Media Player (MPRIS)
+  "custom/media": {
+    "exec": "$HOME/.config/waybar/scripts/mediaplayer.sh",
+    "return-type": "json",
+    "format": "{}",
+    "on-click": "playerctl play-pause 2>/dev/null",
+    "on-click-right": "playerctl next 2>/dev/null",
+    "on-click-middle": "playerctl previous 2>/dev/null",
+    "interval": 2
+  },
+
+  // System Tray
+  "tray": {
+    "icon-size": 15,
+    "spacing": 8
+  },
+
+  // Stats Group (Audio & Network)
+  "group/stats": {
+    "orientation": "inherit",
+    "modules": [
+      "network",
+      "pulseaudio"
+    ]
+  },
+
+  // Hardware Group (CPU & Memory)
+  "group/hardware": {
+    "orientation": "inherit",
+    "modules": [
+      "cpu",
+      "memory"
+    ]
+  },
+
+  // Audio (Posture Gauge styled)
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "  Silenced",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+    "scroll-step": 5,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle 2>/dev/null || pamixer -t 2>/dev/null",
+    "on-click-right": "pavucontrol 2>/dev/null",
+    "tooltip-format": "Volume: {volume}%"
+  },
+
+  // Network
+  "network": {
+    "format-wifi": "󰤨  {essid}",
+    "format-ethernet": "󰀂  Wired",
+    "format-disconnected": "󰤮  Unbound",
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n⇣ {bandwidthDownBytes}  ⇡ {bandwidthUpBytes}",
+    "interval": 5
+  },
+
+  // CPU (Vitality themed)
+  "cpu": {
+    "interval": 3,
+    "format": "󰍛 {usage}%",
+    "tooltip": true
+  },
+
+  // Memory
+  "memory": {
+    "interval": 5,
+    "format": "󰘚 {percentage}%",
+    "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB"
+  },
+
+  // Battery (Resurrection Nodes: 回生)
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰢝 {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip-format": "Resurrection Power: {capacity}%\n{timeTo}"
+  },
+
+  // Clock (with Kanji date option)
+  "clock": {
+    "format": "  {:%I:%M %p}",
+    "format-alt": "  {:%Y年 %m月 %d日 (%a)}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  }
+}

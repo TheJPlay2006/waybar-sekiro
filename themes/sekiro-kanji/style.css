@@ -1,0 +1,274 @@
+/* ==========================================================================
+   SEKIRO: SHADOWS DIE TWICE - WAYBAR THEME (KANJI EDITION)
+   ========================================================================== */
+
+/* Color Palette - Feudal Ash & Crimson */
+@define-color bg_bar transparent;
+@define-color bg_module rgba(22, 17, 19, 0.88);
+@define-color bg_module_hover rgba(38, 22, 26, 0.95);
+
+/* Borders & Accents */
+@define-color border_gold rgba(198, 159, 104, 0.35);
+@define-color border_gold_bright #d4af37;
+@define-color border_red rgba(230, 57, 70, 0.50);
+@define-color border_red_bright #e63946;
+
+/* Text Colors */
+@define-color text_bone #f5f0ea;
+@define-color text_gold #e0a96d;
+@define-color text_muted #9c8a8c;
+
+/* Accent Crimson & Fire */
+@define-color sekiro_red #e63946;
+@define-color sekiro_blood #b14046;
+@define-color sekiro_flame #ff4d5a;
+@define-color sekiro_danger #c1121f;
+
+* {
+  color: @text_bone;
+  border: none;
+  border-radius: 14px;
+  min-height: 0;
+  font-family: 'Noto Sans CJK JP', 'MesloLGL Nerd Font', 'JetBrainsMono Nerd Font', 'FontAwesome', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+window#waybar {
+  background-color: @bg_bar;
+  transition-property: background-color;
+  transition-duration: .4s;
+}
+
+.modules-left {
+  margin-left: 6px;
+}
+
+.modules-right {
+  margin-right: 6px;
+}
+
+/* ==========================================================================
+   BASE MODULE CAPSULES
+   ========================================================================== */
+#custom-sekiro-logo,
+#workspaces,
+#custom-media,
+#window,
+#tray,
+#group-stats,
+#group-hardware,
+#battery,
+#clock {
+  background-color: @bg_module;
+  border: 1px solid @border_gold;
+  border-radius: 12px;
+  padding: 3px 12px;
+  margin: 4px 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  transition: all 0.25s ease-in-out;
+}
+
+#custom-sekiro-logo:hover,
+#custom-media:hover,
+#window:hover,
+#group-stats:hover,
+#group-hardware:hover,
+#battery:hover {
+  border-color: @border_red_bright;
+  background-color: @bg_module_hover;
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.35);
+}
+
+/* ==========================================================================
+   SEKIRO EMBLEM (LEFT)
+   ========================================================================== */
+#custom-sekiro-logo {
+  color: @sekiro_red;
+  font-size: 16px;
+  font-weight: 900;
+  padding: 3px 12px;
+  border-color: @border_red;
+}
+
+#custom-sekiro-logo:hover {
+  color: @sekiro_flame;
+  box-shadow: 0 0 12px rgba(230, 57, 70, 0.6);
+}
+
+/* ==========================================================================
+   WORKSPACES (KANJI)
+   ========================================================================== */
+#workspaces {
+  padding: 2px 5px;
+}
+
+#workspaces button {
+  all: initial;
+  color: @text_muted;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+}
+
+#workspaces button:hover {
+  background-color: rgba(230, 57, 70, 0.2);
+  color: @sekiro_flame;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  background: linear-gradient(135deg, @sekiro_blood 0%, @sekiro_red 100%);
+  color: #ffffff;
+  border: 1px solid @sekiro_flame;
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.65);
+}
+
+#workspaces button.urgent {
+  background-color: @sekiro_danger;
+  color: #ffffff;
+  animation-name: danger_pulse;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes danger_pulse {
+  to {
+    background-color: transparent;
+    color: @sekiro_flame;
+    box-shadow: 0 0 14px @sekiro_danger;
+  }
+}
+
+/* ==========================================================================
+   MEDIA PLAYER
+   ========================================================================== */
+#custom-media {
+  color: @text_bone;
+  padding: 3px 14px;
+}
+
+/* ==========================================================================
+   WINDOW TITLE (CENTER)
+   ========================================================================== */
+#window {
+  color: @text_gold;
+  font-size: 12px;
+  padding: 3px 16px;
+}
+
+window#waybar.empty #window {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   STATS & HARDWARE GROUPS
+   ========================================================================== */
+#group-stats,
+#group-hardware {
+  padding: 3px 12px;
+}
+
+#network,
+#pulseaudio,
+#cpu,
+#memory {
+  margin: 0 6px;
+}
+
+#network {
+  color: #e0a96d;
+}
+
+#network.disconnected {
+  color: @text_muted;
+}
+
+#pulseaudio {
+  color: @sekiro_flame;
+}
+
+#pulseaudio.muted {
+  color: @text_muted;
+}
+
+#cpu {
+  color: #f7a399;
+}
+
+#memory {
+  color: #e29578;
+}
+
+/* ==========================================================================
+   BATTERY (RESURRECTION ORBS)
+   ========================================================================== */
+#battery {
+  color: @text_gold;
+}
+
+#battery.charging {
+  color: #52b788;
+}
+
+#battery.critical:not(.charging) {
+  background-color: @sekiro_danger;
+  color: #ffffff;
+  animation-name: danger_pulse;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* ==========================================================================
+   CLOCK
+   ========================================================================== */
+#clock {
+  color: #ffffff;
+  border-color: @border_red_bright;
+  background: linear-gradient(135deg, rgba(177, 64, 70, 0.6) 0%, rgba(26, 17, 19, 0.95) 100%);
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
+  padding: 3px 14px;
+}
+
+#clock:hover {
+  box-shadow: 0 0 16px rgba(230, 57, 70, 0.7);
+}
+
+/* ==========================================================================
+   SYSTEM TRAY
+   ========================================================================== */
+#tray {
+  padding: 2px 10px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @sekiro_danger;
+}
+
+/* ==========================================================================
+   TOOLTIPS
+   ========================================================================== */
+tooltip {
+  background: rgba(18, 14, 16, 0.97);
+  border: 1px solid @border_gold;
+  border-radius: 10px;
+}
+
+tooltip label {
+  color: @text_bone;
+  padding: 6px;
+}

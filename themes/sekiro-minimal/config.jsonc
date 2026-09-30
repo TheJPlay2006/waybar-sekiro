@@ -1,0 +1,99 @@
+{
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "spacing": 2,
+
+  "modules-left": [
+    "custom/sekiro",
+    "hyprland/workspaces",
+    "niri/workspaces",
+    "sway/workspaces"
+  ],
+  "modules-center": [
+    "hyprland/window",
+    "niri/window",
+    "sway/window"
+  ],
+  "modules-right": [
+    "tray",
+    "pulseaudio",
+    "network",
+    "battery",
+    "clock"
+  ],
+
+  "custom/sekiro": {
+    "format": "隻狼",
+    "tooltip-format": "Sekiro: Shadows Die Twice\n「迷えば、敗れる」",
+    "on-click": "rofi -show drun 2>/dev/null || wofi --show drun 2>/dev/null || fuzzel 2>/dev/null"
+  },
+
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "active": "●",
+      "default": "○"
+    }
+  },
+
+  "niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "●",
+      "default": "○"
+    }
+  },
+
+  "sway/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "focused": "●",
+      "default": "○"
+    }
+  },
+
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 35
+  },
+  "niri/window": {
+    "format": "{}",
+    "max-length": 35
+  },
+  "sway/window": {
+    "format": "{}",
+    "max-length": 35
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": " ",
+    "format-icons": {
+      "default": ["", "", ""]
+    }
+  },
+
+  "network": {
+    "format-wifi": "󰤨  {essid}",
+    "format-ethernet": "󰀂 ",
+    "format-disconnected": "󰤮 "
+  },
+
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+
+  "clock": {
+    "format": "  {:%H:%M}",
+    "format-alt": "  {:%Y-%m-%d}"
+  },
+
+  "tray": {
+    "icon-size": 14,
+    "spacing": 6
+  }
+}
