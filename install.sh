@@ -92,7 +92,15 @@ install_waybar() {
     cp -f "$SCRIPT_DIR/scripts/"*.sh "$WAYBAR_CONFIG_DIR/scripts/"
     chmod +x "$WAYBAR_CONFIG_DIR/scripts/"*.sh
 
-    echo -e "${GREEN}[✓] Waybar theme ($THEME_VARIANT) installed successfully!${RESET}"
+    # Install Sekiro Shinobi Sanctuary Dashboard
+    echo -e "${CYAN}[*] Installing Sekiro Shinobi Sanctuary Dashboard...${RESET}"
+    mkdir -p "$WAYBAR_CONFIG_DIR/dashboard"
+    cp -rf "$SCRIPT_DIR/dashboard/"* "$WAYBAR_CONFIG_DIR/dashboard/"
+    chmod +x "$WAYBAR_CONFIG_DIR/dashboard/sekiro_dashboard.py"
+    mkdir -p "$HOME/.local/bin"
+    ln -sf "$WAYBAR_CONFIG_DIR/dashboard/sekiro_dashboard.py" "$HOME/.local/bin/sekiro-dashboard"
+
+    echo -e "${GREEN}[✓] Waybar theme ($THEME_VARIANT) and Shinobi Dashboard installed successfully!${RESET}"
 }
 
 install_wallpapers() {

@@ -6,6 +6,7 @@
 [![Open Source](https://img.shields.io/badge/Open%20Source-%E2%99%A5-success.svg?style=for-the-badge)](LICENSE)
 [![Author: Jairo Herrera Romero](https://img.shields.io/badge/Author-Jairo%20Herrera%20Romero-d4af37.svg?style=for-the-badge&logo=github)](https://github.com/TheJPlay2006)
 [![Waybar](https://img.shields.io/badge/Waybar-v0.9.0%2B-181113.svg?style=for-the-badge&logo=wayland&logoColor=white)](https://github.com/Alexays/Waybar)
+[![Dashboard](https://img.shields.io/badge/Dashboard-Shinobi%20Sanctuary-crimson.svg?style=for-the-badge)](dashboard/)
 [![GRUB Theme](https://img.shields.io/badge/GRUB-1080p%20%7C%201440p-b14046.svg?style=for-the-badge)](grub/)
 [![Fastfetch](https://img.shields.io/badge/Terminal-Fastfetch%20Themed-d4af37.svg?style=for-the-badge)](fastfetch/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](https://github.com/TheJPlay2006/waybar-sekiro/pulls)
@@ -13,7 +14,7 @@
 <p align="center">
   <b>「迷えば、敗れる」 — <i>Hesitation is defeat</i></b><br>
   A complete, atmospheric Linux desktop suite inspired by FromSoftware's masterpiece <b>Sekiro: Shadows Die Twice</b>.<br>
-  Featuring an authentic Waybar theme, full GRUB bootloader theme, custom terminal Fastfetch, and high-res wallpapers.
+  Featuring an authentic Waybar theme, full Shinobi Sanctuary Dashboard (animated falling Sakura petals), GRUB bootloader theme, custom terminal Fastfetch, and high-res wallpapers.
 </p>
 
 </div>
@@ -28,12 +29,13 @@ waybar-sekiro/
 ├── 🔄 uninstall.sh             # Safe uninstaller (with automatic backup restoration)
 ├── ⚖️ LICENSE                  # MIT License (100% Free & Open Source)
 ├── 👥 CONTRIBUTORS.md          # Project authors and contribution guide
+├── 📂 dashboard/               # Standalone Shinobi Sanctuary Dashboard (Falling Sakura Petals)
 ├── 📂 themes/
 │   ├── sekiro-kanji/           # Flagship Waybar theme (Kanji, Sakura, Vitality & Posture)
 │   └── sekiro-minimal/         # Minimalist edge-to-edge crimson line edition
 ├── 📂 grub/                    # Full Sekiro GRUB Bootloader theme (1080p/1440p + Brush fonts)
 ├── 📂 fastfetch/               # Custom Terminal Fetch (Clan, Dojo, Vitality & Posture stats)
-├── 📂 wallpapers/              # High-resolution Sekiro wallpapers
+├── 📂 wallpapers/              # High-resolution Sekiro wallpapers & shinobi avatar
 └── 📂 scripts/                 # MPRIS media reader and cross-distro update counter
 ```
 
@@ -88,7 +90,32 @@ Sekiro Linux Suite is engineered from the ground up to be **100% Free & Open Sou
 
 ---
 
-## 🏮 2. The GRUB Bootloader Theme
+## 🌸 2. Shinobi Sanctuary Dashboard (Control Center)
+
+A **100% custom, standalone Wayland Control Center** built specifically for the Sekiro Linux Suite — zero external desktop shells required!
+
+* **🌸 Real-Time Falling Sakura Petals & Embers:**  
+  Interactive HTML5 Canvas particle system with delicate cherry blossom petals and glowing sparks drifting across the panel.
+* **⚔️ Combat HUD Gauges:**  
+  - **Vitality Bar (体力):** Glowing turquoise health meter displaying real-time CPU utilization.
+  - **Posture Bar (姿勢):** Amber/gold posture meter that fills up with RAM consumption.
+* **⛩️ Prosthetic Tools & Quick Actions:**  
+  - **Wi-Fi Toggle:** Instant connect/disconnect with active SSID display.
+  - **Bluetooth Toggle:** Controller/audio connectivity.
+  - **Shinobi Terminal:** Quick spawn Alacritty.
+  - **App Launcher:** Integrated Torii application search.
+* **🎚️ Katana Sliders:**  
+  Live volume adjustment (PipeWire/WirePlumber) and screen brightness slider.
+* **🎵 Ancient Melodies Music Shrine:**  
+  MPRIS media player with rotating Sakura blossom disc and playback controls (`⏮`, `▶ / ⏸`, `⏭`).
+* **🏮 Sculptor's Idol Session Controls:**  
+  - `瞑想 (Lock)` • `離脱 (Logout)` • `再起 (Reboot)` • `切腹 (Shutdown)`
+* **⚡ Seamless Waybar Integration & Toggle:**  
+  Click any module on Waybar or press `Mod+S` (or `ESC` to close).
+
+---
+
+## 🏮 3. The GRUB Bootloader Theme
 
 Included in `grub/`, featuring:
 * Custom calligraphy brush typography (`Dersu Uzala brush` & `Fira Code`).
